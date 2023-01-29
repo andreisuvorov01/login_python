@@ -1,8 +1,13 @@
+
 def registracia():
-    login.append(input("создайте логин: "))
-    password.append(input('создайте пароль: '))
-login = ['1212', 'qweasd']
-password = ["1212", "QAZWSX"]
+    login_vvod=(input("создайте логин: "))
+    password_vvod=(input('создайте пароль: '))
+    login_file=open('login.txt','a')
+    password_file=open('password.txt','a')
+    login_file.write(str(login_vvod) +'\n')
+    password_file.write(str(password_vvod) +'\n')
+    login_file.close()
+    password_file.close()
 def vhod():
     global vse, ready
     vse = 0
@@ -11,24 +16,26 @@ def vhod():
     login_norm = input('введите логин: ')
     password_norm = input('введите пароль: ')
     #for i in range(len(login)):
-    while i <= len(login):
-        if login[i] == login_norm:
-            vse = 1
-            break
-        elif login[i] != login_norm :
-            ++i
-        if all(login) != login_norm:
-           print("Неверный логин")
-           exit()
+    with open("login.txt") as f:
+            if login_norm in f.read():
+                vse = 1
+            else:
+                print('Данного логина не существует.\n Зарегестрироваться?')
+                yesOrno=input("да/нет")
+                if yesOrno == "да":
+                    registracia()
+                else: exit()
  #for i in range(len(password)):
-    while i <= len(password):
-        if password[i] != password_norm:++i
-        elif password[i] == password_norm:
-                ready = 1
-                break
-        if all(password) != password_norm:
-            print("Неверный пароль")
-            exit()
+    with open("password.txt") as f:
+        if password_norm in f.read():
+            ready = 1
+        else:
+            print('Данного пароля не существует.\n Зарегестрироваться?')
+            yesOrno = input("да/нет")
+            if yesOrno == "да":
+                registracia()
+            else:
+                exit()
     if (vse == 1) and (ready==1): print("Поздравляю, вы вошли")
 
 
