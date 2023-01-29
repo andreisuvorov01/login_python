@@ -8,6 +8,10 @@ def registracia():
     password_file.write(str(password_vvod) +'\n')
     login_file.close()
     password_file.close()
+    print("Вход: \n")
+    vhod()
+    exit()
+
 def vhod():
     global vse, ready
     vse = 0
